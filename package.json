@@ -1,6 +1,6 @@
 {
     "name": "rtpoet-vscode-extension",
-    "displayName": "RTPet VS Code extension",
+    "displayName": "RTPoet VS Code extension",
     "description": "RTPoet DSL for VS Code",
     "version": "1.0.1",
     "publisher": "kjahed",
