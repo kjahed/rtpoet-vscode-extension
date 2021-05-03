@@ -7,8 +7,11 @@
 build/
 out/
 .gradle/
-src/rt/
 node_modules/
+
+# Project specific
+src/rt/
+demo/src-gen/
 
 # OS
 .DS_Store
