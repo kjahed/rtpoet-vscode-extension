@@ -12,6 +12,7 @@ node_modules/
 # Project specific
 src/rt/
 demo/src-gen/
+demo/.devcontainer/
 
 # OS
 .DS_Store
