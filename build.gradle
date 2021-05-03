@@ -1,0 +1,111 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath 'com.github.node-gradle:gradle-node-plugin:2.2.0'
+        classpath 'de.undercouch:gradle-download-task:4.1.1'
+    }
+}
+
+apply plugin: 'base' 
+apply plugin: 'com.github.node-gradle.node'
+apply plugin: 'de.undercouch.download'
+
+version = '1.0.1'
+
+task downloadDsl(type: Download) {
+    src "https://github.com/kjahed/rtpoet-dsl/releases/download/${project.version}/ca.jahed.rtpoet.dsl.ide-${project.version}.zip"
+    dest new File(buildDir, 'rt.zip')
+    onlyIfModified true
+}
+
+task unzipDsl(type: Copy, dependsOn: downloadDsl) {
+    def tmpDir = new File(buildDir, 'tmp/rt')
+    from zipTree(downloadDsl.dest)
+    into tmpDir                      
+        
+    doLast {
+        copy {
+            from tmpDir.listFiles()[0]
+            into 'src/rt'
+        }
+    }
+}
+
+def inputFiles = fileTree(
+        dir: projectDir,
+        excludes: [ 'out/**', '.gitignore', '.gradle/**', 'build/**', '*.gradle', 'demo/**' ]
+)
+
+npmInstall {
+    dependsOn unzipDsl
+    inputs.files(inputFiles)
+    outputs.dir('out')
+}
+
+task npmInstallVsce(type: NpmTask, dependsOn: npmInstall) {
+    ext.destPath = "$projectDir/node_modules/vsce"
+    outputs.dir(destPath)
+    group 'Node'
+    description 'Installs the NodeJS package "Visual Studio Code Extension Manager"'
+    args = [ 'install', 'vsce' ]
+}
+
+task vscodeExtension(dependsOn: [npmInstall, npmInstallVsce], type: NodeTask) {
+    ext.destDir = new File(buildDir, 'vscode')
+    ext.archiveName = "$project.name-${project.version}.vsix"
+    ext.destPath = "$destDir/$archiveName"
+    inputs.with {
+        files inputFiles
+        dir npmInstallVsce.destPath
+    }
+    outputs.dir destDir
+    doFirst {
+        destDir.mkdirs()
+    }
+    script = file("$npmInstallVsce.destPath/out/vsce")
+    args = [ 'package', '--out', destPath ]
+    execOverrides {
+        workingDir = projectDir
+    }
+}
+
+task installExtension(type: Exec, dependsOn: vscodeExtension) {
+    if (System.properties['os.name'].toLowerCase().contains('windows')) {
+        commandLine 'code.cmd'
+    } else {
+        commandLine 'code'
+    }
+    args '--install-extension', vscodeExtension.destPath
+}
+
+task startCode(type:Exec, dependsOn: installExtension) {
+    if (System.properties['os.name'].toLowerCase().contains('windows')) {
+        commandLine 'code.cmd'
+    } else {
+        commandLine 'code'
+    }
+    environment 'UMLRTS_ROOT', "$projectDir/src/umlrts"
+    args "$projectDir/demo/", '--new-window'
+}
+
+task publish(dependsOn: vscodeExtension, type: NodeTask) {
+    script = file("$projectDir/node_modules/vsce/out/vsce")
+    args = [ 'publish', '-p', System.getenv('ACCESS_TOKEN'), "--packagePath", "${buildDir}/vscode/vscode-extension-self-contained-${project.version}.vsix"]
+    execOverrides {
+        workingDir = projectDir
+    }
+}
+
+build.dependsOn vscodeExtension
+
+clean.doFirst {
+    delete 'src/rt'
+    delete 'node_modules'
+    delete npmInstall.outputs
+    delete vscodeExtension.destDir
+}

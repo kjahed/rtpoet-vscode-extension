@@ -1,0 +1,15 @@
+# VS Code
+*.vsix
+.vscode
+.history/
+
+# Build
+build/
+out/
+.gradle/
+src/rt/
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db

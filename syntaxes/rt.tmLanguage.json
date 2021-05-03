@@ -1,0 +1,132 @@
+{
+    "name": "RT",
+    "scopeName": "text.rt",
+    "fileTypes": [
+        "rt"
+    ],
+    "repository": {
+        "general": {
+            "patterns": [
+                {
+                    "include": "#linecomment"
+                },
+                {
+                    "include": "#blockcomment"
+                },
+                {
+                    "include": "#keyword"
+                },
+                {
+                    "include": "#string"
+                },
+                {
+                    "include": "#action-code"
+                }
+            ]
+        },
+
+        "linecomment": {
+            "name": "comment.line.double-dash.rt",
+            "begin": "(^[ \\t]+)?(?=//)",
+            "end": "(?=$)"
+        },
+
+        "blockcomment": {
+            "name": "comment.block.rt",
+            "begin": "/\\*(\\*)?(?!/)",
+            "end": "\\*/"
+        },
+        
+        "keyword": {
+            "name": "keyword.control.rt",
+            "match": "\\b(import|model|capsule|package|top|class|attribute|operation|public|protected|private|null|artifact|enum|statemachine|initial|choice|history|junction|exit|entry|state|simple|composite|transition|from|to|action|guard|external|internal|sap|spp|relay|auto|lock|app|registration|port|fixed|optional|plugin|part|connect|protocol|in|out|message|triggers|on|int|string|boolean|real|other|~)\\b"
+
+        },
+
+        "string": {
+            "patterns": [
+                {
+                    "include": "#string-single"
+                },
+                {
+                    "include": "#string-double"
+                }
+            ]
+        },
+
+        "string-double": {
+            "name": "string.quoted.double.rt",
+            "begin": "\"",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.begin.rt"
+                }
+            },
+            "end": "(\")|((?:[^\\\\\\n])$)",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.definition.string.end.rt"
+                },
+                "2": {
+                    "name": "invalid.illegal.newline.rt"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#string-character-escape"
+                }
+            ]
+        },
+
+        "string-single": {
+            "name": "string.quoted.single.rt",
+            "begin": "'",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.begin.rt"
+                }
+            },
+            "end": "(\\')|((?:[^\\\\\\n])$)",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.definition.string.end.rt"
+                },
+                "2": {
+                    "name": "invalid.illegal.newline.rt"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#string-character-escape"
+                }
+            ]
+        },
+
+        "string-character-escape": {
+            "name": "constant.character.escape.rt",
+            "match": "\\\\(x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}|u\\{[0-9A-Fa-f]+\\}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.|$)"
+        },
+
+        "action-code": {
+            "name": "string.quoted.multi.rt",
+            "begin": "`",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.begin.rt"
+                }
+            },
+            "end": "`",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.definition.string.end.rt"
+                }
+            }
+        }
+    },
+    "patterns": [
+        {
+            "include": "#general"
+        }
+    ],
+    "uuid": "8383e49a-fa0d-4bb5-827b-10e8abb294ca"
+}

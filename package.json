@@ -1,0 +1,111 @@
+{
+    "name": "rtpoet-vscode-extension",
+    "displayName": "RTPet VS Code extension",
+    "description": "RTPoet DSL for VS Code",
+    "version": "1.0.1",
+    "publisher": "kjahed",
+    "license": "EPL-1.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/kjahed/rtpoet-vscode-extension.git"
+    },
+    "bugs": {
+        "url": "https://github.com/kjahed/rtpoet-vscode-extension/issues"
+    },
+    "engines": {
+        "vscode": "^1.33.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "activationEvents": [
+        "onLanguage:rt"
+    ],
+    "main": "out/extension",
+    "contributes": {
+        "languages": [
+            {
+                "id": "rt",
+                "aliases": [
+                    "rt"
+                ],
+                "extensions": [
+                    ".rt"
+                ],
+                "configuration": "./rt.configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "rt",
+                "scopeName": "text.rt",
+                "path": "./syntaxes/rt.tmLanguage.json"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "RTPoet Configuration",
+            "properties": {
+                "rtpoet.trace.server": {
+                    "scope": "window",
+                    "type": "string",
+                    "enum": [
+                        "off",
+                        "messages",
+                        "verbose"
+                    ],
+                    "default": "off",
+                    "description": "Traces the communication between VS Code and the language server."
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "rt.prtgen.proxy",
+                "title": "Generate Papyrus-RT Model"
+            },
+            {
+                "command": "rt.cppgen.proxy",
+                "title": "Generate C++ Code"
+            },
+            {
+                "command": "rt.jsongen.proxy",
+                "title": "Generate JSON Model"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "when": "resourceLangId == rt",
+                    "command": "rt.prtgen.proxy",
+                    "group": "RTPoet@1"
+                },
+                {
+                    "when": "resourceLangId == rt",
+                    "command": "rt.cppgen.proxy",
+                    "group": "RTPoet@2"
+                },
+                {
+                    "when": "resourceLangId == rt",
+                    "command": "rt.jsongen.proxy",
+                    "group": "RTPoet@3"
+                }
+            ]
+        }
+    },
+    "devDependencies": {
+        "@types/node": "^11.13.2",
+        "typescript": "^3.3.400",
+        "vscode": "^1.1.37"
+    },
+    "dependencies": {
+        "vsce": "^1.88.0",
+        "vscode-languageclient": "^5.2.1"
+    },
+    "scripts": {
+        "prepublish": "node ./node_modules/vscode/bin/install && tsc -p ./src",
+        "compile": "tsc -p ./src",
+        "watch": "tsc -w -p ./src",
+        "update-vscode": "node ./node_modules/vscode/bin/install"
+    }
+}
