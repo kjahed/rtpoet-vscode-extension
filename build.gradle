@@ -15,7 +15,7 @@ apply plugin: 'base'
 apply plugin: 'com.github.node-gradle.node'
 apply plugin: 'de.undercouch.download'
 
-version = '1.0.1'
+version = '1.0.2'
 
 task downloadDsl(type: Download) {
     src "https://github.com/kjahed/rtpoet-dsl/releases/download/${project.version}/ca.jahed.rtpoet.dsl.ide-${project.version}.zip"
