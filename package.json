@@ -56,6 +56,12 @@
                     ],
                     "default": "off",
                     "description": "Traces the communication between VS Code and the language server."
+                },
+                "rtpoet.generate.devcontainer": {
+                    "scope": "window",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Generate C++ devcontainer for generated code"
                 }
             }
         },

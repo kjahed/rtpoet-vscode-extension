@@ -33,7 +33,11 @@ export function activate(context: ExtensionContext) {
     context.subscriptions.push(commands.registerCommand("rt.cppgen.proxy", async () => {
         let activeEditor = window.activeTextEditor;
         if (activeEditor && activeEditor.document && activeEditor.document.languageId === 'rt')
-            commands.executeCommand("rt.cppgen", activeEditor.document.uri.toString())
+            commands.executeCommand(
+                "rt.cppgen", 
+                activeEditor.document.uri.toString(),
+                workspace.getConfiguration("rtpoet").get("generate.devcontainer")
+            )
     }));
 
     context.subscriptions.push(commands.registerCommand("rt.jsongen.proxy", async () => {
