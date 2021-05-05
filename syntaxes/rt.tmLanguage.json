@@ -39,7 +39,7 @@
         
         "keyword": {
             "name": "keyword.control.rt",
-            "match": "\\b(import|model|capsule|package|top|class|attribute|operation|public|protected|private|null|artifact|enum|statemachine|initial|choice|history|junction|exit|entry|state|simple|composite|transition|from|to|action|guard|external|internal|sap|spp|relay|auto|lock|app|registration|port|fixed|optional|plugin|part|connect|protocol|in|out|message|triggers|on|int|String|boolean|double|other|~)\\b"
+            "match": "\\b(import|model|capsule|package|top|class|attribute|operation|public|protected|private|null|artifact|enum|statemachine|initial|choice|history|junction|exit|entry|state|simple|composite|transition|from|to|action|guard|external|internal|sap|spp|relay|auto|lock|app|registration|port|fixed|optional|plugin|part|connect|protocol|in|out|message|triggers|on|int|String|boolean|double|other|preface|header|implementation)\\b"
 
         },
 
