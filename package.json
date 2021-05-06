@@ -13,7 +13,7 @@
         "url": "https://github.com/kjahed/rtpoet-vscode-extension/issues"
     },
     "engines": {
-        "vscode": "^1.33.0"
+        "vscode": "^1.55.0"
     },
     "categories": [
         "Programming Languages"

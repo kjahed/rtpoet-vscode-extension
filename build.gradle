@@ -89,7 +89,6 @@ task startCode(type:Exec, dependsOn: installExtension) {
     } else {
         commandLine 'code'
     }
-    environment 'UMLRTS_ROOT', "$projectDir/src/devcontainer/umlrts"
     args "$projectDir/demo/", '--new-window'
 }
 
