@@ -15,7 +15,7 @@ apply plugin: 'base'
 apply plugin: 'com.github.node-gradle.node'
 apply plugin: 'de.undercouch.download'
 
-version = '1.0.3'
+version = '1.0.4'
 
 task downloadDsl(type: Download) {
     src "https://github.com/kjahed/rtpoet-dsl/releases/download/${project.version}/ca.jahed.rtpoet.dsl.ide-${project.version}.zip"
@@ -89,7 +89,7 @@ task startCode(type:Exec, dependsOn: installExtension) {
     } else {
         commandLine 'code'
     }
-    environment 'UMLRTS_ROOT', "$projectDir/src/umlrts"
+    environment 'UMLRTS_ROOT', "$projectDir/src/devcontainer/umlrts"
     args "$projectDir/demo/", '--new-window'
 }
 

@@ -19,7 +19,8 @@
         "Programming Languages"
     ],
     "activationEvents": [
-        "onLanguage:rt"
+        "onLanguage:rt",
+        "onLanguage:xml"
     ],
     "main": "out/extension",
     "contributes": {
@@ -56,12 +57,6 @@
                     ],
                     "default": "off",
                     "description": "Traces the communication between VS Code and the language server."
-                },
-                "rtpoet.generate.devcontainer": {
-                    "scope": "window",
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Generate C++ devcontainer for generated code"
                 }
             }
         },
@@ -77,6 +72,14 @@
             {
                 "command": "rt.jsongen.proxy",
                 "title": "Generate JSON Model"
+            },
+            {
+                "command": "rt.rtgen.proxy",
+                "title": "Generate RTModel"
+            },
+            {
+                "command": "rt.devcontainergen.proxy",
+                "title": "RTPoet: Generate C++ devcontainer UML-RT development"
             }
         ],
         "menus": {
@@ -95,6 +98,10 @@
                     "when": "resourceLangId == rt",
                     "command": "rt.jsongen.proxy",
                     "group": "RTPoet@3"
+                },
+                {
+                    "when": "resourceExtname == .uml",
+                    "command": "rt.rtgen.proxy"
                 }
             ]
         }

@@ -33,17 +33,23 @@ export function activate(context: ExtensionContext) {
     context.subscriptions.push(commands.registerCommand("rt.cppgen.proxy", async () => {
         let activeEditor = window.activeTextEditor;
         if (activeEditor && activeEditor.document && activeEditor.document.languageId === 'rt')
-            commands.executeCommand(
-                "rt.cppgen", 
-                activeEditor.document.uri.toString(),
-                workspace.getConfiguration("rtpoet").get("generate.devcontainer")
-            )
+            commands.executeCommand("rt.cppgen", activeEditor.document.uri.toString())
     }));
 
     context.subscriptions.push(commands.registerCommand("rt.jsongen.proxy", async () => {
         let activeEditor = window.activeTextEditor;
         if (activeEditor && activeEditor.document && activeEditor.document.languageId === 'rt')
             commands.executeCommand("rt.jsongen", activeEditor.document.uri.toString())
+    }));
+
+    context.subscriptions.push(commands.registerCommand("rt.rtgen.proxy", async () => {
+        let activeEditor = window.activeTextEditor;
+        if (activeEditor && activeEditor.document && activeEditor.document.fileName.endsWith('.uml'))
+            commands.executeCommand("rt.rtgen", activeEditor.document.uri.toString())
+    }));
+
+    context.subscriptions.push(commands.registerCommand("rt.devcontainergen.proxy", async () => {
+        commands.executeCommand("rt.devcontainergen")
     }));
     
     let lc = new LanguageClient('rtpoet', 'RTPoet Language Server', serverOptions, clientOptions);
