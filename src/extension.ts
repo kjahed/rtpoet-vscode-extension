@@ -36,12 +36,6 @@ export function activate(context: ExtensionContext) {
             commands.executeCommand("rt.cppgen", activeEditor.document.uri.toString())
     }));
 
-    context.subscriptions.push(commands.registerCommand("rt.jsongen.proxy", async () => {
-        let activeEditor = window.activeTextEditor;
-        if (activeEditor && activeEditor.document && activeEditor.document.languageId === 'rt')
-            commands.executeCommand("rt.jsongen", activeEditor.document.uri.toString())
-    }));
-
     context.subscriptions.push(commands.registerCommand("rt.rtgen.proxy", async () => {
         let activeEditor = window.activeTextEditor;
         if (activeEditor && activeEditor.document && activeEditor.document.fileName.endsWith('.uml'))

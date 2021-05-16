@@ -70,10 +70,6 @@
                 "title": "Generate C++ Code"
             },
             {
-                "command": "rt.jsongen.proxy",
-                "title": "Generate JSON Model"
-            },
-            {
                 "command": "rt.rtgen.proxy",
                 "title": "Generate RTModel"
             },
@@ -93,11 +89,6 @@
                     "when": "resourceLangId == rt",
                     "command": "rt.cppgen.proxy",
                     "group": "RTPoet@2"
-                },
-                {
-                    "when": "resourceLangId == rt",
-                    "command": "rt.jsongen.proxy",
-                    "group": "RTPoet@3"
                 },
                 {
                     "when": "resourceExtname == .uml",
