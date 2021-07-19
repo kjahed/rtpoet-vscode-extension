@@ -1,0 +1,87 @@
+model PingPong {
+	
+	protocol PingPongProtocol {
+		in message ping()
+		out message pong()
+	}
+
+	capsule Pinger {
+		port pingPort : ~PingPongProtocol
+		port log: RTSLibrary.Log
+		port timer: RTSLibrary.Timing
+
+		statemachine {
+			initial init
+			state delay
+			
+			state playing {
+				entry `
+					if ( this.pingPort.ping().send() ) {
+						this.log.log("ping sent!");
+					} else {
+						this.log.log("Error sending Ping!");
+					}	
+				`
+			}
+			
+			transition {
+				from init 
+				to playing
+				action `
+					this.log.log("Starting game!");
+				`
+			}
+			
+			transition {
+				from playing
+				to delay
+				triggers from pingPort on pong
+				action `
+					this.log.log("[Pinger] Pong received!");
+					this.timer.informIn(Timespec.get(1,0));
+				`
+			}
+
+			transition {
+				from delay
+				to playing
+				triggers from timer on timeout
+			}		
+		}
+	}	
+	
+	capsule Ponger {
+		port pongPort : PingPongProtocol
+		port log: RTSLibrary.Log
+
+		statemachine {
+			initial init
+			state playing
+			
+			transition { 
+				from init 
+				to playing
+			}	
+								
+			transition {
+				from playing
+				to playing
+				triggers from pongPort on ping
+				action `
+					this.log.log("[Ponger] Ping received!");
+					if (this.pongPort.pong().send()){
+						this.log.log("[Ponger] Pong sent!");
+					} else {
+						this.log.log("[Ponger] Error sending Pong!");
+					}
+				`
+			}
+		}
+	}
+
+	top capsule Top {
+		part pinger : Pinger
+		part ponger : Ponger
+		connect ponger.pongPort to pinger.pingPort
+	}
+}

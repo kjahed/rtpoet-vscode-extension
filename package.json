@@ -57,6 +57,12 @@
                     ],
                     "default": "off",
                     "description": "Traces the communication between VS Code and the language server."
+                },
+                "rtpoet.js.inspector": {
+                    "scope": "window",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Generate state inspector for Javascript code."
                 }
             }
         },
@@ -68,6 +74,10 @@
             {
                 "command": "rt.cppgen.proxy",
                 "title": "Generate C++ Code"
+            },
+            {
+                "command": "rt.jsgen.proxy",
+                "title": "Generate JS Code (Experimental)"
             },
             {
                 "command": "rt.rtgen.proxy",
@@ -89,6 +99,11 @@
                     "when": "resourceLangId == rt",
                     "command": "rt.cppgen.proxy",
                     "group": "RTPoet@2"
+                },
+                {
+                    "when": "resourceLangId == rt",
+                    "command": "rt.jsgen.proxy",
+                    "group": "RTPoet@3"
                 },
                 {
                     "when": "resourceExtname == .uml",

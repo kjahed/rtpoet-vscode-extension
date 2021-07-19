@@ -36,6 +36,13 @@ export function activate(context: ExtensionContext) {
             commands.executeCommand("rt.cppgen", activeEditor.document.uri.toString())
     }));
 
+    context.subscriptions.push(commands.registerCommand("rt.jsgen.proxy", async () => {
+        let activeEditor = window.activeTextEditor;
+        if (activeEditor && activeEditor.document && activeEditor.document.languageId === 'rt')  
+            commands.executeCommand("rt.jsgen", activeEditor.document.uri.toString(), 
+                workspace.getConfiguration("rtpoet").get("js.inspector"))
+    }));
+
     context.subscriptions.push(commands.registerCommand("rt.rtgen.proxy", async () => {
         let activeEditor = window.activeTextEditor;
         if (activeEditor && activeEditor.document && activeEditor.document.fileName.endsWith('.uml'))
