@@ -85,7 +85,7 @@
             },
             {
                 "command": "rt.devcontainergen.proxy",
-                "title": "RTPoet: Generate C++ devcontainer UML-RT development"
+                "title": "RTPoet: Generate container for UML-RT development"
             }
         ],
         "menus": {
