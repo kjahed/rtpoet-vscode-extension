@@ -6,6 +6,12 @@ RUN apt-get install -y software-properties-common
 RUN add-apt-repository --yes ppa:rpardini/adoptopenjdk
 RUN apt-get install -y adoptopenjdk-8-installer
 
+# Node.js
+RUN curl -sL https://deb.nodesource.com/setup_15.x -o nodesource_setup.sh
+RUN chmod +x nodesource_setup.sh
+RUN ./nodesource_setup.sh
+RUN apt-get install -y nodejs
+
 # UML-RTS
 RUN apt-get install -y libzmqpp-dev
 ENV UMLRTS_ROOT /umlrts
