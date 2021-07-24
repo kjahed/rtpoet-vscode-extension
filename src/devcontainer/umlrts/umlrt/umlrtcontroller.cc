@@ -50,7 +50,6 @@
 
 /*static*/ UMLRTTCPService UMLRTController::tcpService;
 /*static*/ UMLRTMQTTService UMLRTController::mqttService;
-/*static*/ UMLRTZMQService UMLRTController::zmqService;
 
 // Error codes to string
 static const char * errorToString[] = UMLRTCONTROLLER_ERROR_CODE_TO_STRING;
@@ -537,7 +536,6 @@ void * UMLRTController::run ( void * args )
     //TODO should rune once per app, not controller
 	tcpService.spawn();
 	mqttService.spawn();
-	zmqService.spawn();
 
     if (slots == NULL)
     {

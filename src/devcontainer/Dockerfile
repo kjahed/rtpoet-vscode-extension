@@ -13,7 +13,6 @@ RUN ./nodesource_setup.sh
 RUN apt-get install -y nodejs
 
 # UML-RTS
-RUN apt-get install -y libzmqpp-dev
 ENV UMLRTS_ROOT /umlrts
 COPY ./umlrts /umlrts
 WORKDIR /umlrts

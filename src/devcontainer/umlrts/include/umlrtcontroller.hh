@@ -21,7 +21,6 @@
 #include "umlrtcontrollercommand.hh"
 #include "umlrttcpservice.hh"
 #include "umlrtmqttservice.hh"
-#include "umlrtzmqservice.hh"
 
 struct UMLRTCommsPort;
 class UMLRTMessagePool;
@@ -287,7 +286,6 @@ private:
 
     static UMLRTTCPService tcpService;
     static UMLRTMQTTService mqttService;
-    static UMLRTZMQService zmqService;
 
     bool _exit; // Normal exit.
     void * exitValue; // Defined by user on normal exit. Set to EXIT_FAILURE on abort.
