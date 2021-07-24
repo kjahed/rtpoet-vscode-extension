@@ -56,6 +56,12 @@ export function activate(context: ExtensionContext) {
     if(!process.env["UMLRTS_ROOT"])
         context.environmentVariableCollection.replace("UMLRTS_ROOT", path.join(context.extensionPath, "src", "devcontainer", "umlrts"));
 
+    context.subscriptions.push(commands.registerCommand("rt.buildrts", async () => {
+        const terminal = window.createTerminal("Build UMLRTS-RTS");
+        terminal.sendText("cd $UMLRTS_ROOT && make");
+        terminal.show();
+    }));
+
     let lc = new LanguageClient('rtpoet', 'RTPoet Language Server', serverOptions, clientOptions);
     // enable tracing (.Off, .Messages, Verbose)
     lc.trace = Trace.Verbose;

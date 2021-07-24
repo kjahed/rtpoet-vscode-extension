@@ -15,12 +15,15 @@
     "engines": {
         "vscode": "^1.55.0"
     },
+    "enableProposedApi": true,
     "categories": [
         "Programming Languages"
     ],
     "activationEvents": [
         "onLanguage:rt",
-        "onLanguage:xml"
+        "onLanguage:xml",
+        "onCommand:rt.devcontainergen.proxy",
+        "onCommand:rt.buildrts"
     ],
     "main": "out/extension",
     "contributes": {
@@ -86,6 +89,10 @@
             {
                 "command": "rt.devcontainergen.proxy",
                 "title": "RTPoet: Generate container for UML-RT development"
+            },
+            {
+                "command": "rt.buildrts",
+                "title": "RTPoet: Build UMLRT C++ RTS"
             }
         ],
         "menus": {
