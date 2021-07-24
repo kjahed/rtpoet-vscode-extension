@@ -3,7 +3,7 @@
     "displayName": "RTPoet VS Code extension",
     "description": "RTPoet DSL for VS Code",
     "version": "1.0.6",
-    "publisher": "kjahed",
+    "publisher": "jahed",
     "license": "EPL-1.0",
     "repository": {
         "type": "git",
@@ -15,7 +15,6 @@
     "engines": {
         "vscode": "^1.55.0"
     },
-    "enableProposedApi": true,
     "categories": [
         "Programming Languages"
     ],

@@ -94,7 +94,7 @@ task startCode(type:Exec, dependsOn: installExtension) {
 
 task publish(dependsOn: vscodeExtension, type: NodeTask) {
     script = file("$projectDir/node_modules/vsce/out/vsce")
-    args = [ 'publish', '-p', System.getenv('ACCESS_TOKEN'), "--packagePath", "${buildDir}/vscode/vscode-extension-self-contained-${project.version}.vsix"]
+    args = [ 'publish', '-p', System.getenv('ACCESS_TOKEN'), "--packagePath", "${buildDir}/vscode/rtpoet-vscode-extension-${project.version}.vsix"]
     execOverrides {
         workingDir = projectDir
     }
