@@ -2,7 +2,7 @@
     "name": "rtpoet-vscode-extension",
     "displayName": "RTPoet VS Code extension",
     "description": "RTPoet DSL for VS Code",
-    "version": "1.0.1",
+    "version": "1.0.6",
     "publisher": "kjahed",
     "license": "EPL-1.0",
     "repository": {
@@ -118,7 +118,7 @@
         "vscode": "^1.1.37"
     },
     "dependencies": {
-        "vsce": "^1.88.0",
+        "vsce": "^1.96.1",
         "vscode-languageclient": "^5.2.1"
     },
     "scripts": {

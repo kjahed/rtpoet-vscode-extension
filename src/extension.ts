@@ -53,7 +53,8 @@ export function activate(context: ExtensionContext) {
         commands.executeCommand("rt.devcontainergen")
     }));
     
-    context.environmentVariableCollection.replace("UMLRTS_ROOT", path.join(context.extensionPath, "src", "devcontainer", "umlrts"));
+    if(!process.env["UMLRTS_ROOT"])
+        context.environmentVariableCollection.replace("UMLRTS_ROOT", path.join(context.extensionPath, "src", "devcontainer", "umlrts"));
 
     let lc = new LanguageClient('rtpoet', 'RTPoet Language Server', serverOptions, clientOptions);
     // enable tracing (.Off, .Messages, Verbose)
