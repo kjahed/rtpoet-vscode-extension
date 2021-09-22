@@ -2,7 +2,7 @@
     "name": "rtpoet-vscode-extension",
     "displayName": "RTPoet VS Code extension",
     "description": "RTPoet DSL for VS Code",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "publisher": "jahed",
     "license": "EPL-1.0",
     "repository": {
@@ -83,7 +83,7 @@
             },
             {
                 "command": "rt.rtgen.proxy",
-                "title": "Generate RTModel"
+                "title": "Generate Textual Model"
             },
             {
                 "command": "rt.devcontainergen.proxy",
@@ -124,7 +124,7 @@
         "vscode": "^1.1.37"
     },
     "dependencies": {
-        "vsce": "^1.96.1",
+        "vsce": "^1.99.0",
         "vscode-languageclient": "^5.2.1"
     },
     "scripts": {
