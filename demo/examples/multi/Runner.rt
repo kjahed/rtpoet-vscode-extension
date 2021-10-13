@@ -1,0 +1,9 @@
+model Runner {
+    import 'PingerPonger.rt'
+
+	top capsule Top {
+		part pinger : PingerPonger.Pinger
+		part ponger : PingerPonger.Ponger
+		connect ponger.pongPort to pinger.pingPort
+	}
+}
