@@ -142,6 +142,38 @@ export function activate(context: ExtensionContext) {
         }
     }));
 
+    context.subscriptions.push(commands.registerCommand("rt.plantumlgen.proxy", async () => {
+        let activeEditor = window.activeTextEditor;
+        if (activeEditor && activeEditor.document && activeEditor.document.fileName.endsWith('.rt')) {
+            window.withProgress({
+                location: ProgressLocation.Notification,
+                title: "Generating PlantUML Diagrams",
+                cancellable: false
+            }, async (progress, token) => {
+                let result: {[key: string]: any} = await commands.executeCommand("rt.plantumlgen", activeEditor.document.uri.toString());
+
+                if(result.error) {
+                    window.showErrorMessage("Error generating PlantUML diagrams: " + result.message);
+                } else {
+                    window.showInformationMessage("PlantUML diagrams generated", "Open")
+                    .then(selection => {
+                        if (selection === "Open") {
+                            commands.executeCommand("vscode.open", Uri.file(result.path));
+                            setTimeout(function() {
+                                commands.executeCommand("plantuml.preview");
+                            }, 1000);
+                        }
+                    });
+                }
+
+                return new Promise<void>(resolve => {
+                    resolve();
+                });
+            });
+        }
+    }));
+
+
     context.subscriptions.push(commands.registerCommand("rt.devcontainergen.proxy", async () => {
         window.withProgress({
             location: ProgressLocation.Notification,
